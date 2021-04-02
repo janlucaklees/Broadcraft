@@ -1,0 +1,5 @@
+name: Broadcraft
+version: 0.0.0
+author: Jan-Luca Klees
+main: de.janlucaklees.broadcraft.main.Broadcraft
+api-version: 1.16
