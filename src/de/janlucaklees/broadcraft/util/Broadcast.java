@@ -1,5 +1,6 @@
 package de.janlucaklees.broadcraft.util;
 
+import de.janlucaklees.broadcraft.error.BroadcastNotStoppedError;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -40,5 +41,13 @@ public class Broadcast {
 
     public void stop() {
         this.scheduler.cancelTask(this.task);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        if(this.scheduler.isCurrentlyRunning(this.task)) {
+            this.stop();
+            throw new BroadcastNotStoppedError();
+        }
     }
 }
